@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    container_name: bms_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data_container:/var/lib/postgresql/data
+    environment:
+        POSTGRES_USER: bms_user
+        POSTGRES_PASSWORD: bms_password
+        POSTGRES_HOST: db
+        POSTGRES_PORT: 5432
+        POSTGRES_DB: bms_db
+    networks: 
+      - db_network
+
+  pgadmin:
+    image: dpage/pgadmin4:4.28
+    container_name: bms_admin
+    links:
+      - db
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@bms.com
+      PGADMIN_DEFAULT_PASSWORD: bms_password
+    ports:
+      - "80:80"
+    networks: 
+      - db_network
+    
+networks:
+  db_network:
+    driver: bridge
+
+volumes:
+  db_data_container:
+  static:
