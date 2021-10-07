@@ -10,7 +10,7 @@ router.register(r'movies', MovieViewSet, basename='movie')
 router.register(r'shows', ShowViewSet, basename='show')
 
 urlpatterns = [
-    path("show/<slug:show_codename>/book/<int:seat_no>", book_ticket),
+    path("book/<slug:show_codename>/<int:seat_no>", book_ticket),
     path("docs/", schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc')
 ]
 

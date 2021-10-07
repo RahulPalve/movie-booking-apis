@@ -10,10 +10,10 @@ class CitySerializer(serializers.ModelSerializer):
 
 class ShowSerializer(serializers.ModelSerializer):
     cinema = serializers.SlugRelatedField(
-        slug_field="name", queryset=Cinema.objects.all()
+        slug_field="codename", queryset=Cinema.objects.all()
     )
     movie = serializers.SlugRelatedField(
-        slug_field="name", queryset=Movie.objects.all()
+        slug_field="codename", queryset=Movie.objects.all()
     )
     available_seats = serializers.ReadOnlyField()
 
@@ -26,7 +26,7 @@ class ShowSerializer(serializers.ModelSerializer):
 
 class CinemaSerializer(serializers.ModelSerializer):
     city = serializers.SlugRelatedField(
-        slug_field="name", queryset=City.objects.all()
+        slug_field="codename", queryset=City.objects.all()
     )
     shows = ShowSerializer(many=True, read_only=True)
 

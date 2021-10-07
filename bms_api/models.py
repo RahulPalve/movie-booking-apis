@@ -29,7 +29,7 @@ class Show(AbstractEntity):
     end_time = models.TimeField()
     total_seats = models.PositiveIntegerField(default=25)
     booked_seats = ArrayField(
-        models.PositiveIntegerField(), size=25, blank=True, null=True
+        models.PositiveIntegerField(), size=25, default=list
     )
     cinema = models.ForeignKey(Cinema, related_name="shows", on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, related_name="shows", on_delete=models.CASCADE)
